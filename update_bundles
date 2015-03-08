@@ -20,6 +20,7 @@ vim_org_scripts = [
   ['jquery',        '12107', 'syntax'],
   ['autoclose',     '10873', 'plugin'],
   ['repeat',        '8206',  'plugin'],
+  ['Rename',        '16331',  'plugin'],
 ]
 
 require 'fileutils'
