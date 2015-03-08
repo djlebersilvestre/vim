@@ -29,8 +29,16 @@ set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 " Ao invés de alertar sobre modificações, exibir diálogo para confirmação
 set confirm
 
+" Quando der paste de algo, o valor substituído não será guardado
+xnoremap p "_dP"
+
 " Seta o w!! para aplicar o sudo ao salvar o arquivo (quando esquecemos)
 cmap w!! w !sudo tee > /dev/null %
+
+" Seta o Q e o W para sempre ficar minúsculo na linha de comando (para
+" evitar o erro de Q - command not found)
+cmap Q q
+cmap W w
 
 " Exibe o comando disparado na última linha do VIM
 set showcmd
