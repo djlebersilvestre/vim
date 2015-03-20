@@ -26,6 +26,10 @@ set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 " outros editores
 "set nostartofline
 
+" Força o command do vim funcionar como o bash (com os aliases carregados)
+let $BASH_ENV = "~/.bash_profile"
+set shellcmdflag=-O\ expand_aliases\ -c
+
 " Ao invés de alertar sobre modificações, exibir diálogo para confirmação
 set confirm
 
