@@ -139,8 +139,11 @@ set backspace=eol,start,indent
 set whichwrap=b,s,h,l,<,>,~,[,]
 
 " Destaca espaços em branco (com a cor azul) no final de linhas
-highlight WhitespaceEOL ctermbg=blue guibg=blue
-match WhitespaceEOL /\s\+$/
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+match ExtraWhitespace /\s\+\%#\@<!$/
+
+" Deleta espaços em branco no final das linhas
+autocmd FileType c,cpp,java,php,ruby autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 " Acerta a ordem dos tabs de auto-complete (plugin SuperTab)
 let g:SuperTabMappingBackward = '<tab>'
