@@ -13,14 +13,15 @@ git_bundles = [
   'git://github.com/tpope/vim-vividchalk.git',
   'git://github.com/tsaleh/vim-supertab.git',
   'git://github.com/vim-ruby/vim-ruby.git',
+  'git://github.com/scrooloose/syntastic.git',
 ]
 
 vim_org_scripts = [
-  ['IndexedSearch', '7062',  'plugin'],
-  ['jquery',        '15752', 'syntax'],
-  # ['autoclose',     '10873', 'plugin'],
-  ['repeat',        '8206',  'plugin'],
-  ['Rename',        '16331',  'plugin'],
+#  ['IndexedSearch', '7062',  'plugin'],
+#  ['jquery',        '15752', 'syntax'],
+#  # ['autoclose',     '10873', 'plugin'],
+#  ['repeat',        '8206',  'plugin'],
+#  ['Rename',        '16331',  'plugin'],
 ]
 
 require 'fileutils'

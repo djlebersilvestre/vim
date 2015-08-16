@@ -1,10 +1,10 @@
-" Quando o vimrc for alterado recarregar automaticamente
+" Auto-reload when vimrc changes
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
-" Ativa o plugin do pathogen (olha para a pasta bundle)
+" Activates pathogen plugin - using bundle directory
 execute pathogen#infect()
 
-" Apresenta a linha de status do arquivo no rodapé da tela
+" Show file status in the footer
 set laststatus=2
 set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 "              | | | | |  |   |      |  |     |    |
@@ -22,54 +22,65 @@ set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 "              | +-- modified flag in square brackets
 "              +-- full path to file in the buffer
 
-" Ajusta a posição do cursor (maior facilidade para pessoas acostumadas com
-" outros editores
-"set nostartofline
+" Syntastic config
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_highlighting = 1
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_ruby_checkers = ['rubocop', 'mri']
+let g:syntastic_scss_checkers = ['sass', 'scss_lint']
+let g:syntastic_haml_checkers = ['haml', 'haml_lint']
 
-" Força o command do vim funcionar como o bash (com os aliases carregados)
+
+" Vim command line working like bash (with my default aliases)
 let $BASH_ENV = "~/.bash_profile"
 set shellcmdflag=-O\ expand_aliases\ -c
 
-" Ao invés de alertar sobre modificações, exibir diálogo para confirmação
+" Open a confirm dialog if the file is changed but not saved
 set confirm
 
-" Quando der paste de algo, o valor substituído não será guardado
+" The pasted text is kept instead of the replaced part
 xnoremap p "_dP"
 
-" Seta o w!! para aplicar o sudo ao salvar o arquivo (quando esquecemos)
+" w!! will do the sudo if needed
 cmap w!! w !sudo tee > /dev/null %
 
-" Exibe o comando disparado na última linha do VIM
+" Shows the command executed in the last line of vim
 set showcmd
 set cmdheight=2
 
-" Pode alterar os buffers sem salvá-los
+" Can change the buffers without saving them
 set hidden
 
-" Desliga os backups de arquivos
+" Turn off the backup of files
 set nobackup
 set nowb
 set noswapfile
 
-" Quantidade máxima de UNDOS
+" Maximum quantity of undos
 set undolevels=10000
 
-" Se a linha estourar o comprimento da tela ela não será quebrada na próxima linha
+" Do not break lines if the right corner is reached
 set nowrap
 
-" Seta o título da janela com o nome do arquivo em edição
+" Set the title of the window with the file's name
 set title
 
-" Auto identação de textos
+" Automatic indentation
 set autoindent
 
-" As buscas serão case insensitive
+" Searches will be case insensitive
 set ignorecase
 
-" Nas buscas 'Daniel' == 'Daniel' mas 'daniel' == ('daniel' || 'Daniel')
+" Smart search ex: 'Daniel' == 'Daniel' BUT 'daniel' == ('daniel' || 'Daniel')
 set smartcase
 
-" Tabulação com 2 espaços
+" Tabs with 2 spaces
 set softtabstop=2
 set tabstop=2
 set shiftwidth=2
