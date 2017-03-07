@@ -122,12 +122,11 @@ set hlsearch
 " A busca opera já enquanto estiver digitando, ou seja, incremental
 set incsearch
 
+" Always show at least one line above/below the cursor
+set scrolloff=1
+
 " Melhora as cores do menu de auto-complete
 highlight Pmenu ctermbg=238 gui=bold
-
-" Ativa o plugin de identificação de arquivos
-filetype plugin on
-filetype indent on
 
 " Desliga a identificação de comentários automática
 "set fo-=c fo-=o fo-=r
@@ -135,15 +134,19 @@ filetype indent on
 " Deixa o drop-down do auto-complete dinâmico na digitação da palavra
 set completeopt=longest,menuone
 
-" Desabilita completamente a compatibilidade com o VI
-set nocompatible
-
 " Força o background para preto
 set background=dark
 
+" Desabilita completamente a compatibilidade com o VI
+set nocompatible
+
 " Ativa o plugin de destaque de sintaxe
-syntax enable
 syntax on
+
+" Ativa o plugin de identificação de arquivos
+filetype on
+filetype plugin on
+filetype indent on
 
 " Configuração do backspace (sobre auto identação)
 set backspace=eol,start,indent
