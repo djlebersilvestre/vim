@@ -93,6 +93,7 @@ set shiftround
 
 " Aplica cores mais fortes
 colors ron
+colorscheme desert
 
 " Permite wildcards na busca de arquivos no modo de comando (modo recursivo)
 set wildmenu
