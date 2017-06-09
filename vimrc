@@ -36,6 +36,44 @@ let g:syntastic_ruby_checkers = ['rubocop', 'mri']
 let g:syntastic_scss_checkers = ['sass', 'scss_lint']
 let g:syntastic_haml_checkers = ['haml', 'haml_lint']
 
+if executable('ag')
+  " use ag instead of grep, if available
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " use ag instead of ack, if available
+  let g:ackprg = 'ag --nogroup --column'
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files . -co --exclude-standard']
+endif
+
+if executable('matcher')
+  let g:path_to_matcher = '/usr/local/bin/matcher'
+  let g:ctrlp_match_func = { 'match': 'GoodMatch' }
+
+  function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
+    " Create a cache file if not yet exists
+    let cachefile = ctrlp#utils#cachedir().'/matcher.cache'
+    if !( filereadable(cachefile) && a:items == readfile(cachefile) )
+      call writefile(a:items, cachefile)
+    endif
+    if !filereadable(cachefile)
+      return []
+    endif
+
+    " a:mmode is currently ignored. In the future, we should probably do
+    " something about that. the matcher behaves like "full-line".
+    let cmd = g:path_to_matcher.' --limit '.a:limit.' --manifest '.cachefile.' '
+    if !( exists('g:ctrlp_dotfiles') && g:ctrlp_dotfiles )
+      let cmd = cmd.'--no-dotfiles '
+    endif
+    let cmd = cmd.a:str
+
+    return split(system(cmd), "\n")
+  endfunction
+endif
 
 " Vim command line working like bash (with my default aliases)
 let $BASH_ENV = "~/.bash_profile"
@@ -167,8 +205,23 @@ let g:SuperTabMappingForward = '<s-tab>'
 " Configura para identificação automática do contexto do auto-complete (plugin
 " SuperTab)
 let g:SuperTabDefaultCompletionType = "context"
-"let g:SuperTabContextDefaultCompletionType = "<c-p>"
-"let g:SuperTabCompletionContexts = ['s:ContextText']
+let g:SuperTabContextDefaultCompletionType = "<c-p>"
+let g:SuperTabCompletionContexts = ['s:ContextText']
+
+" if has('mac') && ($TERM == 'xterm-256color' || $TERM == 'screen-256color')
+"   map <Esc>OP <F1>
+"   map <Esc>OQ <F2>
+"   map <Esc>OR <F3>
+"   map <Esc>OS <F4>
+"   map <Esc>[16~ <F5>
+"   map <Esc>[17~ <F6>
+"   map <Esc>[18~ <F7>
+"   map <Esc>[19~ <F8>
+"   map <Esc>[20~ <F9>
+"   map <Esc>[21~ <F10>
+"   map <Esc>[23~ <F11>
+"   map <Esc>[24~ <F12>
+" endif
 
 " Mapeia o ctrl-l para limpar a tela até a próxima pesquisa
 nnoremap <C-L> :nohl<CR><C-L>
@@ -207,10 +260,10 @@ vmap <silent> <C-S-F6> gt
 imap <silent> <C-A> <ESC><C-W>gf<CR>
 map <silent> <C-A> <C-W>gf<CR>
 
-" Mapeia o F4 para fechar o arquivo em questão (ou tab aberta)
-imap <silent> <F4> <C-O>:bdelete<CR>
-nmap <silent> <F4> :bdelete<CR>
-vmap <silent> <F4> <ESC>:bdelete<CR>
+" Mapeia o F3 para fechar o arquivo em questão (ou tab aberta)
+imap <silent> <F3> <C-O>:bdelete<CR>
+nmap <silent> <F3> :bdelete<CR>
+vmap <silent> <F3> <ESC>:bdelete<CR>
 
 " Mapeia o ctrl-b para explodir o buffer de arquivos em abas
 imap <silent> <C-B> <C-O>:tab sball<CR>
