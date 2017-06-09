@@ -15,11 +15,11 @@ git_bundles = [
   'git://github.com/ervandew/supertab.git',
   'git://github.com/vim-ruby/vim-ruby.git',
   'git://github.com/vim-syntastic/syntastic.git',
-  'git://github.com/ctrlpvim/ctrlp.vim'
+  'git://github.com/ctrlpvim/ctrlp.vim',
+  'git://github.com/henrik/vim-indexed-search'
 ]
 
 vim_org_scripts = [
-#  ['IndexedSearch', '7062',  'plugin'],
 #  ['jquery',        '15752', 'syntax'],
 #  # ['autoclose',     '10873', 'plugin'],
 #  ['repeat',        '8206',  'plugin'],
