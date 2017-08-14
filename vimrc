@@ -123,66 +123,62 @@ set softtabstop=2
 set tabstop=2
 set shiftwidth=2
 
-" Usar espaços quando teclar TAB
+" Use spaces when TAB is pressed
 set expandtab
 
-" Se estiver com 3 espaços e teclar tab, vai para 4 ao invés de 5
+" 3 spaces + TAB, turns into 4 spaces instead of 5
 set shiftround
 
-" Aplica cores mais fortes
+" String colors
 colors ron
 colorscheme desert
 
-" Permite wildcards na busca de arquivos no modo de comando (modo recursivo)
+" Activates wildcards in the file search (command mode)
 set wildmenu
 
-" O ls do console de comandos é igual ao ls da linha de comando do terminal
+" The way we list files in command mode is similar to the terminal ls
 set wildmode=list:longest,full
 
-" Arquivos que devem ser ignorados na pesquisa com wildcards
+" Some files we want to ignore on the wildcard search
 set wildignore=*.dll,*.o,*.obj,*.bak,*.exe,*.pyc,*.jpg,*.gif,*.png
 
-" Sempre deve mostrar a posição do cursor
+" Always show the cursor position in the rules
 set ruler
 
-" Ativa a numeração da linha no lado esquedo da tela
+" Activates line numbers in the bottom-left corner
 set number
 
-" Ativa o mouse em todos os modos para se integrar com o vim (para copy e
-" paste com middle button mudar para 'r')
+" Integrates the mouse with vim for all command types
 set mouse=a
 
-" Sempre que um arquivo mudar (por algum intervenção externa), o vim recarrega ele automaticamente
+" Autoload the file if it is changed
 set autoread
 
-" Destaca os itens pesquisados no texto inteiro
+" Highlight found items during search
 set hlsearch
 
-" A busca opera já enquanto estiver digitando, ou seja, incremental
+" Search 'on the fly': matches are shown while typing
 set incsearch
 
 " Always show at least one line above/below the cursor
 set scrolloff=1
 
-" Melhora as cores do menu de auto-complete
+" Better colors for autocomplete
 highlight Pmenu ctermbg=238 gui=bold
 
-" Desliga a identificação de comentários automática
-"set fo-=c fo-=o fo-=r
-
-" Deixa o drop-down do auto-complete dinâmico na digitação da palavra
+" Dynamic autocomplete while typing
 set completeopt=longest,menuone
 
-" Força o background para preto
+" Dark background
 set background=dark
 
-" Desabilita completamente a compatibilidade com o VI
+" No compatible with VI (old version)
 set nocompatible
 
-" Ativa o plugin de destaque de sintaxe
+" Activates sintax highlight plugin
 syntax on
 
-" Ativa o plugin de identificação de arquivos
+" Activates filytype plugin
 filetype on
 filetype plugin on
 filetype indent on
@@ -191,19 +187,18 @@ filetype indent on
 set backspace=eol,start,indent
 set whichwrap=b,s,h,l,<,>,~,[,]
 
-" Destaca espaços em branco (com a cor azul) no final de linhas
+" Highlights whitespaces in the end of lines
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 match ExtraWhitespace /\s\+\%#\@<!$/
 
-" Deleta espaços em branco no final das linhas
+" Deletes whitespaces in the end of lines
 autocmd FileType c,cpp,java,php,ruby autocmd BufWritePre <buffer> :%s/\s\+$//e
 
-" Acerta a ordem dos tabs de auto-complete (plugin SuperTab)
+" Fixes the order of autocomplete's TAB
 let g:SuperTabMappingBackward = '<tab>'
 let g:SuperTabMappingForward = '<s-tab>'
 
-" Configura para identificação automática do contexto do auto-complete (plugin
-" SuperTab)
+" Configures supertab plugin - autocomplete
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabContextDefaultCompletionType = "<c-p>"
 let g:SuperTabCompletionContexts = ['s:ContextText']
@@ -223,15 +218,15 @@ let g:SuperTabCompletionContexts = ['s:ContextText']
 "   map <Esc>[24~ <F12>
 " endif
 
-" Mapeia o ctrl-l para limpar a tela até a próxima pesquisa
+" CTRL+l cleans the screen
 nnoremap <C-L> :nohl<CR><C-L>
 
-" Mapeia o ctrl-k para comentar / descomentar uma linha com #
+" CTRL+k adds/removes comments
 imap <silent> <C-k> <C-O>:.!perl -wlne'/^(\s*)((?:\# ?)?)(.*)/;print $2?"$1$3":"$1\# $3"'<CR>
 map <silent> <C-k> :.!perl -wlne'/^(\s*)((?:\# ?)?)(.*)/;print $2?"$1$3":"$1\# $3"'<CR>
 vmap <silent> <C-k> :!perl -wlne'/^(\s*)((?:\# ?)?)(.*)/;print $2?"$1$3":"$1\# $3"'<CR>
 
-" Mapeamento do shift-seta para seleção de textos em modo visual conforme editores padrão
+" SHIFT+[arrow] goes to visual mode selection automatically
 inoremap <S-Up> <C-O>vk
 nnoremap <S-Up> vk
 vnoremap <S-Up> k
@@ -244,14 +239,6 @@ vnoremap <S-Right> l
 inoremap <S-Left> <C-O>vh
 nnoremap <S-Left> vh
 vnoremap <S-Left> h
-
-" Mapeia o ctrl-f6 para pular as abas (semelhante ao eclipse)
-imap <silent> <C-F6> <ESC>gt
-nmap <silent> <C-F6> gt
-vmap <silent> <C-F6> gt
-imap <silent> <C-S-F6> <ESC>gT
-nmap <silent> <C-S-F6> gT
-vmap <silent> <C-S-F6> gt
 
 " Mapeia o ctrl-a para abrir o arquivo do cursor em uma nova aba e jogar a aba
 " no final da lista
