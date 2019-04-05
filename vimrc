@@ -1,8 +1,29 @@
 " Auto-reload when vimrc changes
 autocmd! bufwritepost .vimrc source ~/.vimrc
 
-" Activates pathogen plugin - using bundle directory
-execute pathogen#infect()
+" Vim Plug: https://github.com/junegunn/vim-plug
+" Specify a directory for plugins
+call plug#begin('~/.vim/plugged')
+
+Plug 'git://github.com/tpope/vim-cucumber.git'
+Plug 'git://github.com/tpope/vim-fugitive.git'
+Plug 'git://github.com/tpope/vim-git.git'
+Plug 'git://github.com/tpope/vim-haml.git'
+Plug 'git://github.com/tpope/vim-markdown.git'
+Plug 'git://github.com/tpope/vim-rails.git'
+Plug 'git://github.com/tpope/vim-repeat.git'
+Plug 'git://github.com/tpope/vim-surround.git'
+Plug 'git://github.com/tpope/vim-vividchalk.git'
+Plug 'git://github.com/tpope/vim-endwise.git'
+Plug 'git://github.com/tpope/vim-jdaddy.git'
+Plug 'git://github.com/vim-ruby/vim-ruby.git'
+Plug 'git://github.com/ervandew/supertab.git'
+Plug 'git://github.com/henrik/vim-indexed-search'
+Plug 'git://github.com/morhetz/gruvbox'
+Plug 'git://github.com/junegunn/fzf.vim'
+
+" Initialize plugin system
+call plug#end()
 
 " Show file status in the footer
 set laststatus=2
@@ -22,58 +43,22 @@ set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 "              | +-- modified flag in square brackets
 "              +-- full path to file in the buffer
 
-" Syntastic config
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_enable_highlighting = 1
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_ruby_checkers = ['rubocop', 'mri']
-let g:syntastic_scss_checkers = ['sass', 'scss_lint']
-let g:syntastic_haml_checkers = ['haml', 'haml_lint']
+" >> FZF configurations
+" Hitting <space> twice or <control>+<P> will open the fuzzy search
+let mapleader = ' '
+nnoremap <silent> <leader><Space> :Files<CR>
+nnoremap <silent> <C-P> :Files<CR>
 
-if executable('ag')
-  " use ag instead of grep, if available
-  set grepprg=ag\ --nogroup\ --nocolor
+" <space>+<-> (dash) will list files in the same directory
+nnoremap <silent> <leader>- :Files <C-r>=expand("%:h")<CR>/<CR>
 
-  " use ag instead of ack, if available
-  let g:ackprg = 'ag --nogroup --column'
+" Activates the history file and maps to <space>+<H> to most recent files
+let g:fzf_history_dir = '~/.cache/fzf-history'
+nnoremap <silent> <leader>h :History<CR>
 
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-  let g:ctrlp_user_command = ['.git/', 'cd %s && git ls-files . -co --exclude-standard']
-endif
-
-if executable('matcher')
-  let g:path_to_matcher = '/usr/local/bin/matcher'
-  let g:ctrlp_match_func = { 'match': 'GoodMatch' }
-
-  function! GoodMatch(items, str, limit, mmode, ispath, crfile, regex)
-    " Create a cache file if not yet exists
-    let cachefile = ctrlp#utils#cachedir().'/matcher.cache'
-    if !( filereadable(cachefile) && a:items == readfile(cachefile) )
-      call writefile(a:items, cachefile)
-    endif
-    if !filereadable(cachefile)
-      return []
-    endif
-
-    " a:mmode is currently ignored. In the future, we should probably do
-    " something about that. the matcher behaves like "full-line".
-    let cmd = g:path_to_matcher.' --limit '.a:limit.' --manifest '.cachefile.' '
-    if !( exists('g:ctrlp_dotfiles') && g:ctrlp_dotfiles )
-      let cmd = cmd.'--no-dotfiles '
-    endif
-    let cmd = cmd.a:str
-
-    return split(system(cmd), "\n")
-  endfunction
-endif
+" FZF - command-line fuzzy finder
+set rtp+=/usr/local/opt/fzf
+" << FZF configurations
 
 " Vim command line working like bash (with my default aliases)
 let $BASH_ENV = "~/.bash_profile"
@@ -169,8 +154,8 @@ highlight Pmenu ctermbg=238 gui=bold
 " Dynamic autocomplete while typing
 set completeopt=longest,menuone
 
-" Dark background
-set background=dark
+" Gruvbox config
+colorscheme gruvbox
 
 " No compatible with VI (old version)
 set nocompatible
