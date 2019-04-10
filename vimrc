@@ -20,7 +20,7 @@ Plug 'git://github.com/vim-ruby/vim-ruby.git'
 Plug 'git://github.com/ervandew/supertab.git'
 Plug 'git://github.com/henrik/vim-indexed-search'
 Plug 'git://github.com/morhetz/gruvbox'
-Plug 'git://github.com/junegunn/fzf.vim'
+Plug '/usr/local/opt/fzf' | Plug 'git://github.com/junegunn/fzf.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -44,6 +44,7 @@ set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 "              +-- full path to file in the buffer
 
 " >> FZF configurations
+
 " Hitting <space> twice or <control>+<P> will open the fuzzy search
 let mapleader = ' '
 nnoremap <silent> <leader><Space> :Files<CR>
@@ -56,9 +57,20 @@ nnoremap <silent> <leader>- :Files <C-r>=expand("%:h")<CR>/<CR>
 let g:fzf_history_dir = '~/.cache/fzf-history'
 nnoremap <silent> <leader>h :History<CR>
 
-" FZF - command-line fuzzy finder
-set rtp+=/usr/local/opt/fzf
+" <ctrl>+<B> will open the files buffer (same for <space>+<B>)
+imap <silent> <C-B> <C-O>:Buffer<CR>
+nmap <silent> <C-B> :Buffer<CR>
+vmap <silent> <C-B> <ESC>:Buffer<CR>
+nnoremap <silent> <leader>b :Buffer<CR>
+
+" Mapeia o gb e gB para andar entre os arquivos do buffer
+map <silent> gb :bnext<CR>
+map <silent> gB :bprev<CR>
+
 " << FZF configurations
+
+" Help sharing the copy-paste from vim
+set clipboard=unnamed
 
 " Vim command line working like bash (with my default aliases)
 let $BASH_ENV = "~/.bash_profile"
@@ -136,6 +148,9 @@ set number
 " Integrates the mouse with vim for all command types
 set mouse=a
 
+" Disables mouse integration so we can easily copy-paste stuff from vim
+"set mouse=
+
 " Autoload the file if it is changed
 set autoread
 
@@ -184,8 +199,7 @@ let g:SuperTabMappingBackward = '<tab>'
 let g:SuperTabMappingForward = '<s-tab>'
 
 " Configures supertab plugin - autocomplete
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-p>"
+let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabCompletionContexts = ['s:ContextText']
 
 " if has('mac') && ($TERM == 'xterm-256color' || $TERM == 'screen-256color')
@@ -236,15 +250,6 @@ map <silent> <C-A> <C-W>gf<CR>
 imap <silent> <F3> <C-O>:bdelete<CR>
 nmap <silent> <F3> :bdelete<CR>
 vmap <silent> <F3> <ESC>:bdelete<CR>
-
-" Mapeia o ctrl-b para explodir o buffer de arquivos em abas
-imap <silent> <C-B> <C-O>:tab sball<CR>
-nmap <silent> <C-B> :tab sball<CR>
-vmap <silent> <C-B> <ESC>:tab sball<CR>
-
-" Mapeia o gb e gB para andar entre os arquivos do buffer
-map <silent> gb :bnext<CR>
-map <silent> gB :bprev<CR>
 
 " Mapeia o gy para pegar uma palavra do cursor e guardar no buffer
 nmap gy lb"wye
