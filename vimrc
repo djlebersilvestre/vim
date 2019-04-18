@@ -151,7 +151,9 @@ set mouse=a
 " Disables mouse integration so we can easily copy-paste stuff from vim
 "set mouse=
 
-" Autoload the file if it is changed
+" Autoload the file if changed
+au CursorHold,CursorHoldI * checktime
+au FocusGained,BufEnter * :checktime
 set autoread
 
 " Highlight found items during search
