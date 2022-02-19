@@ -3,8 +3,8 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 
 " Automatic installation of Plug
 if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -78,10 +78,6 @@ map <silent> gB :bprev<CR>
 
 " Help sharing the copy-paste from vim
 set clipboard=unnamed
-
-" Vim command line working like bash (with my default aliases)
-let $BASH_ENV = "~/.bash_profile"
-set shellcmdflag=-O\ expand_aliases\ -c
 
 " Open a confirm dialog if the file is changed but not saved
 set confirm
@@ -157,6 +153,10 @@ set mouse=a
 
 " Disables mouse integration so we can easily copy-paste stuff from vim
 "set mouse=
+
+" Vim command line working like bash (with my default aliases)
+"let $BASH_ENV = '~/.bash_profile'
+"set shellcmdflag=-O\ expand_aliases\ -cset mouse=
 
 " Autoload the file if changed
 au CursorHold,CursorHoldI * checktime
