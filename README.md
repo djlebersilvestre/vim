@@ -13,6 +13,7 @@ We can leverage Fzf inside vim which is one of the plugins configured in this vi
 To install Fzf follow these steps:
 
 ```
+brew install fd
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew install fzf
 $(brew --prefix)/opt/fzf/install!

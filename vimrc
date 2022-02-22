@@ -8,6 +8,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+set rtp+=/opt/homebrew/opt/fzf
+
 " Vim Plug: https://github.com/junegunn/vim-plug
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
@@ -27,7 +29,7 @@ Plug 'git://github.com/vim-ruby/vim-ruby.git'
 Plug 'git://github.com/ervandew/supertab.git'
 Plug 'git://github.com/henrik/vim-indexed-search'
 Plug 'git://github.com/morhetz/gruvbox'
-Plug '/usr/local/opt/fzf' | Plug 'git://github.com/junegunn/fzf.vim'
+Plug '/opt/homebrew/opt/fzf'
 
 " Initialize plugin system
 call plug#end()
@@ -54,8 +56,8 @@ set statusline=%F%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 
 " Hitting <space> twice or <control>+<P> will open the fuzzy search
 let mapleader = ' '
-nnoremap <silent> <leader><Space> :Files<CR>
-nnoremap <silent> <C-P> :Files<CR>
+nnoremap <silent> <leader><Space> :FZF<CR>
+nnoremap <silent> <C-P> :FZF<CR>
 
 " <space>+<-> (dash) will list files in the same directory
 nnoremap <silent> <leader>- :Files <C-r>=expand("%:h")<CR>/<CR>
