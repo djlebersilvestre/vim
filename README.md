@@ -8,6 +8,7 @@ This setup is working on MacOS but should be easily adjusted to Linux distros to
 
 Four quick steps and you should be good to go
 
+
 #### 1) OPTIONAL: Fzf installation
 
 We can leverage Fzf inside vim which is one of the plugins configured in this vimrc.
@@ -20,17 +21,20 @@ brew install fzf
 $(brew --prefix)/opt/fzf/install!
 ```
 
+
 #### 2) Clone the repo in your home directory
 
 ```
 cd ~ && git clone https://github.com/djlebersilvestre/vim.git && mv vim/ .vim/
 ```
 
+
 #### 3) Open Vim (which should already have a nice layout with the new vimrc)
 
 ```
 vim
 ```
+
 
 #### 4) Install plugins
 
