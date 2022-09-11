@@ -3,6 +3,7 @@
 Quick Vim setup based on https://github.com/junegunn/vim-plug for customization.
 This setup is working on MacOS but should be easily adjusted to Linux distros too.
 
+
 ### Installation
 
 Four quick steps and you should be good to go
