@@ -18,7 +18,7 @@ To install Fzf follow these steps:
 brew install fd
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew install fzf
-$(brew --prefix)/opt/fzf/install!
+$(brew --prefix)/opt/fzf/install
 ```
 
 
