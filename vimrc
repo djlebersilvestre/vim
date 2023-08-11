@@ -8,7 +8,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-set rtp+=/opt/homebrew/opt/fzf
+set rtp+=/usr/local/opt/fzf
 
 " Vim Plug: https://github.com/junegunn/vim-plug
 " Specify a directory for plugins
@@ -29,7 +29,7 @@ Plug 'git://github.com/vim-ruby/vim-ruby.git'
 Plug 'git://github.com/ervandew/supertab.git'
 Plug 'git://github.com/henrik/vim-indexed-search'
 Plug 'git://github.com/morhetz/gruvbox'
-Plug '/opt/homebrew/opt/fzf'
+Plug '/usr/local/opt/fzf'
 
 " Initialize plugin system
 call plug#end()
